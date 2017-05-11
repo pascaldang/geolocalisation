@@ -1,17 +1,58 @@
+// Fonction qui releve les coordonnées via le navigateur
 function surveillePosition(position) {
 	var infopos = "Position déterminée :\n";
 	infopos += "Latitude : "+position.coords.latitude +"\n";
 	infopos += "Longitude: "+position.coords.longitude+"\n";
 	infopos += "Altitude : "+position.coords.altitude +"\n";
 	infopos += "Vitesse  : "+position.coords.speed +"\n";
+
+//Envoie les coordonnées vers le fichier Html
 	document.getElementById("infoposition").innerHTML = infopos;
 
+// On stocke les coordonnées dans une valables position pour pouvoir les utilisé plus simplement
+	var pos= new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+
+// Propriété de la vue de la map
 	var mapProp= {
-		center:new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
-		zoom:5,
+		center:pos,
+		zoom:19,
 	};
+
+	//Envoie la map vers le fichiers Htlm
 	var map=new google.maps.Map(document.getElementById("map"),mapProp);
+
+//affiche le Marqueur sur la map
+var marker = new google.maps.Marker({
+      position: pos,
+      map: map,
+      title:"Vous êtes ici"
+    });
 }
 
+// Fonction de gestion d'erreur (explicite)
+function erreurPosition(error) {
+    var info = "Erreur lors de la géolocalisation : ";
+    switch(error.code) {
+    case error.TIMEOUT:
+    	info += "Timeout !";
+    break;
+    case error.PERMISSION_DENIED:
+	info += "Vous n’avez pas donné la permission";
+    break;
+    case error.POSITION_UNAVAILABLE:
+    	info += "La position n’a pu être déterminée";
+    break;
+    case error.UNKNOWN_ERROR:
+	info += "Erreur inconnue";
+    break;
+    }
+    // Envoie le message d'erreur vers le fichiers Htlm
+    document.getElementById("infoposition").innerHTML = info;
+}
 
-var survId = navigator.geolocation.watchPosition(surveillePosition);
+//Appel des callbacks
+if(navigator.geolocation){
+	survId = navigator.geolocation.watchPosition(surveillePosition, erreurPosition,{maximumAge:600000,enableHighAccuracy:true});
+}else{
+	alert("Ce ne supporte pas la géolocalisation");
+}
