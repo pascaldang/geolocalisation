@@ -1,35 +1,45 @@
+// Fonction qui releve les coordonnées via le navigateur
 function surveillePosition(position) {
 	var infopos = "Position déterminée :\n";
 	infopos += "Latitude : "+position.coords.latitude +"\n";
 	infopos += "Longitude: "+position.coords.longitude+"\n";
 	infopos += "Altitude : "+position.coords.altitude +"\n";
 	infopos += "Vitesse  : "+position.coords.speed +"\n";
+
+//Envoie les coordonnées vers le fichier Html
 	document.getElementById("infoposition").innerHTML = infopos;
 
-	var pos = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+// On stocke les coordonnées dans une valables position pour pouvoir les utilisé plus simplement
+	var pos= new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+
+//Ajout des coordonnées dans le local storage	
 	localStorage.setItem("Coordonnées", pos);
 
-	var i;
-
+//Affichage des items dans la console
 	console.log("local storage");
-	for (i = 0; i < localStorage.length; i++)   {
+	for (var i = 0; i < localStorage.length; i++)   {
     	console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
 	}
 
+
+// Propriété de la vue de la map
 	var mapProp= {
-		center: pos,
+		center:pos,
 		zoom:19,
 	};
 
+	//Envoie la map vers le fichiers Htlm
 	var map=new google.maps.Map(document.getElementById("map"),mapProp);
 
-	var marker = new google.maps.Marker({
+//affiche le Marqueur sur la map
+var marker = new google.maps.Marker({
       position: pos,
       map: map,
-      title:"Vous êtes ici",
+      title:"Vous êtes ici"
     });
 }
 
+// Fonction de gestion d'erreur (explicite)
 function erreurPosition(error) {
     var info = "Erreur lors de la géolocalisation : ";
     switch(error.code) {
@@ -37,21 +47,22 @@ function erreurPosition(error) {
     	info += "Timeout !";
     break;
     case error.PERMISSION_DENIED:
-		info += "Vous n’avez pas donné la permission";
+	info += "Vous n’avez pas donné la permission";
     break;
     case error.POSITION_UNAVAILABLE:
     	info += "La position n’a pu être déterminée";
     break;
     case error.UNKNOWN_ERROR:
-		info += "Erreur inconnue";
+	info += "Erreur inconnue";
     break;
     }
+    // Envoie le message d'erreur vers le fichiers Htlm
     document.getElementById("infoposition").innerHTML = info;
 }
 
-
-if(navigator.geolocation) {
-    survId = navigator.geolocation.watchPosition(surveillePosition,erreurPosition,{maximumAge:30000,enableHighAccuracy:true});
-} else {
-    alert("Ce navigateur ne supporte pas la géolocalisation");
+//Appel des callbacks
+if(navigator.geolocation){
+	survId = navigator.geolocation.watchPosition(surveillePosition, erreurPosition,{maximumAge:600000,enableHighAccuracy:true});
+}else{
+	alert("Ce ne supporte pas la géolocalisation");
 }
