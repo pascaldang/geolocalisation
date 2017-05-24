@@ -2,16 +2,20 @@
 <html lang="fr">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>HTML5 : Géolocalisation</title>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<script type="text/javascript" src="geoloc.js"></script>
 </head>
 
 <body>
 	<!-- Affichage des coordonnées-->
-	<div id="infoposition"></div>
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-1" id="map" style="width:50vw;height:70vh;"></div>
+		<div class="col-lg-3" id="infoposition"></div>
+	</div>
 
 	<!-- Affichage de la carte-->
-	<div id="map" style="width:100vw;height:80vh;"></div>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqxcHtCT577gZ6zHz3rjQKnZkVyTjwSos&callback=myMap"></script>
 </body>
 </html>
