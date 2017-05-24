@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>HTML5 : Géolocalisation</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="geoloc.js"></script>
+</head>
+	
+
+
+<body>
+<header>
+	
+	<div class="jumbotron">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="title col-lg-8"><h1>Géolocalisation GANG !</h1></div>
+			<div class="img col-lg-4" ><img src="./img/scope.png"></div>
+			</div>
+			</div>
+		
+	</div>
+</header>
+
+</div>
+	<!-- Affichage des coordonnées-->
+<div class="container">
+<div class="row">
+		<div class="panel-body col-lg-8 col-lg-offset-1" id="map" style="width:50vw;height:70vh;"></div>
+		<div class="panel-body col-lg-3" id="infoposition"></div>
+</div>
+</div>
+
+
+    <!--Copyright-->
+    <div class="footer-copyright">
+        <div class="container-fluid">
+            <p> © 2017 Copyright:  Come find your own crew, we've already got one! </p>
+
+        </div>
+    </div>
+
+    <!--/.Copyright-->
+
+
+	<!-- Affichage de la carte-->
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/tether.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqxcHtCT577gZ6zHz3rjQKnZkVyTjwSos&callback=myMap"></script>
+	
+</body>
+</html>

@@ -1,0 +1,17 @@
+.panel-body{
+	border-style: hidden;
+	border-width: 3px;
+	border-color: black;
+	margin: 10px;
+	box-shadow: 10px 10px 5px #888888;
+	border-radius: 5px;
+}
+
+.footer-copyright{
+	text-align: center;
+}
+img{
+	height: 50px;
+	width: 50px;
+}
+
